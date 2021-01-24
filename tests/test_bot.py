@@ -69,11 +69,6 @@ def test_get_chat_id(update_with_expectedkey):
     assert get_chat_id(update_with_expectedkey) == 1
 
 
-def test_raises_exception_on_key_not_found(update_without_expectedkey):
-    with pytest.raises(KeyError):
-        get_user_first_name(update_without_expectedkey)
-
-
 def test_raises_exception_on_not_int(update_without_expectedkey):
     with pytest.raises(TypeError):
         get_chat_id(update_without_expectedkey)
