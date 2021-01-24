@@ -25,6 +25,8 @@ def get_chat_id(data):
     """
     chat_id = data['message']['chat']['id']
 
+    if not isinstance(chat_id, int):
+        raise TypeError('Please chat_id must be an int')
     return chat_id
 
 
