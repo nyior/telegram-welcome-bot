@@ -13,9 +13,8 @@ def get_user_first_name(data):
     """
     Method to extract a newly added user's first name.
     """
-    # first_name = data['message']['new_chat_member']['first_name']
-    # return first_name
-    pass
+    first_name = data['message']['new_chat_member']['first_name']
+    return first_name
 
 
 def send_message(prepared_data):  
@@ -29,6 +28,8 @@ def send_message(prepared_data):
 @post('/')
 def main():  
     data = bottle_request.json
+
+    first_name = get_user_first_name(data)
 
     print(data)
     # try:
