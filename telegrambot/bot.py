@@ -11,10 +11,21 @@ BOT_URL = f"https://api.telegram.org/bot{TOKEN}/"
 
 def get_user_first_name(data):  
     """
-    Method to extract a newly added user's first name.
+    Method to extract a newly added user's first name
+    from telegram request
     """
     first_name = data['message']['new_chat_member']['first_name']
+
     return first_name
+
+
+def get_chat_id(data):  
+    """
+    Method to extract chat id from telegram request.
+    """
+    chat_id = data['message']['chat']['id']
+
+    return chat_id
 
 
 def send_message(prepared_data):  
