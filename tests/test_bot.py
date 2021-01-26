@@ -2,7 +2,8 @@ import pytest
 from telegrambot.bot import (
                                 get_user_first_name, 
                                 get_chat_id,
-                                prepare_welcome_text)
+                                prepare_welcome_text,
+                                get_group_name)
 
 
 @pytest.fixture
@@ -24,7 +25,8 @@ def update_with_expectedkey():
                                                 'last_name': 'Clement'
                             },
                             'chat': {
-                                        'id':1
+                                        'id':1,
+                                        'title': 'Bubbl'
                                     }
                 }
             }
@@ -61,6 +63,15 @@ def test_get_user_first_name(update_with_expectedkey):
     first_name = get_user_first_name(update_with_expectedkey)
 
     assert first_name.lower() == "nyior"
+
+
+def test_get_group_name(update_with_expectedkey):  
+    """
+    Method to test the get_group_name function
+    """
+    group_name = get_group_name(update_with_expectedkey)
+
+    assert group_name.lower() == "bubbl"
 
 
 def test_get_chat_id(update_with_expectedkey):  
