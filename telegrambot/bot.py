@@ -35,7 +35,7 @@ def get_chat_id(data):
 def prepare_welcome_text(data):  
     user = get_user_first_name(data)
     welcome_text = f""" 
-                    *Hi {user}, welcome to the Bubbl Family*                                                                                                              we are _very_ glad to have you here :) Not required, but if you can, introduce yourself just so other members of this community get to know you.                                                                          _no fear, e no dey too serious_  :-))                                                                                                               Just tell us who you are, what you do, and your interests in the tech space and beyond if you want.
+                    *Hi {user}, welcome to the Bubbl Family*\nwe are _very_ glad to have you here :)\n\nNot required, but if you can, introduce yourself just so other members of this community get to know you.\n\n_no fear, e no dey too serious_  :-))\n\nJust tell us who you are, what you do, and your interests in the tech space and beyond if you want.
                    """
 
     json_data = {
@@ -61,8 +61,11 @@ def send_message(prepared_data):
 @post('/')
 def main():  
     data = bottle_request.json
-    welcome_text = prepare_welcome_text(data)
-    send_message(welcome_text)
+    user = get_user_first_name(data)
+    
+    if user is not None: #only send a reply when a new user has
+        welcome_text = prepare_welcome_text(data)
+        send_message(welcome_text)
 
     return response  # status 200 OK by default
 
