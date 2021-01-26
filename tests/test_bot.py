@@ -1,7 +1,8 @@
 import pytest
 from telegrambot.bot import (
                                 get_user_first_name, 
-                                get_chat_id)
+                                get_chat_id,
+                                prepare_welcome_text)
 
 
 @pytest.fixture
@@ -72,3 +73,15 @@ def test_get_chat_id(update_with_expectedkey):
 def test_raises_exception_on_not_int(update_without_expectedkey):
     with pytest.raises(TypeError):
         get_chat_id(update_without_expectedkey)
+
+
+def test_prepare_welcome_text(update_with_expectedkey):
+    """
+    function that tests the prepare_welcome_text method
+    """
+    data = prepare_welcome_text(update_with_expectedkey)
+
+    assert (
+            "chat_id" in data.keys() 
+            and "text" in data.keys() 
+            and "parse_mode" in data.keys())
