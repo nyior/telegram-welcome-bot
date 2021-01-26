@@ -1,0 +1,1 @@
+web: python ./telegrambot/bot.py --log-file -

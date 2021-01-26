@@ -1,3 +1,4 @@
+import os
 import requests
 from decouple import config
 from bottle import (  
@@ -6,6 +7,7 @@ from bottle import (
 
 
 TOKEN = config('TOKEN') #retrieving the env var TOKEN
+ENV = config('ENV')
 BOT_URL = f"https://api.telegram.org/bot{TOKEN}/" 
 
 
@@ -70,5 +72,8 @@ def main():
     return response  # status 200 OK by default
 
 
-if __name__ == '__main__':  
-    run(host='0.0.0.0', port=8080, debug=True)
+if __name__ == '__main__': 
+    if ENV == "development":
+        run(host='0.0.0.0', port=8080, debug=True)
+    run(server='gunicorn', host='0.0.0.0', port=8080)
+    
